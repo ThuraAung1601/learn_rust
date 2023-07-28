@@ -10,7 +10,11 @@ fn main() {
     
     let start: i32 = start_arg.parse().unwrap_or(0);
     let end: i32 = end_arg.parse().unwrap_or(0);
-    let step: usize = step_arg.parse().unwrap_or(0);
+    let mut step: usize = step_arg.parse().unwrap_or(0);
+    
+    // iterator used in .step_by() cannot be 0 since step_by(1) means 1 step and if it is step_by(0), it means there is no step.
+    // thread 'main' panicked at 'assertion failed: step != 0'
+    if step == 0 { step = 1; }
     
     println!("Fahr Celcius");
     if start <= end {
