@@ -1,3 +1,7 @@
+// No. 1
+// cargo run <fah1> <fah2> .... <fahN>
+// cargo test
+
 // 1.1 Ordinary loop
 fn fahr_to_cel_v(v: &[f32]) -> Vec<f32> {
     // Using reference value instead of cloning makes less computational cost
