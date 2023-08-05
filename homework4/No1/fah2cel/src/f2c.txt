@@ -1,0 +1,115 @@
+// Just notes
+
+//     // Ordinary loop
+// fn fahr_to_cel_v_loop1(v: Vec<f32>) -> Vec<f32> {
+//     // Parameter v takes ownership of the value 
+//     // so we have to clone the vector v 
+//     // More compuational cost than 2nd loop function
+//     let mut x: Vec<f32> = v;
+//     for _i in 0..x.len() {
+//         // (5.0/9.0)*(fahr - 32.0)
+//         x[_i] = (5.0/9.0)*(x[_i] - 32.0);
+//     }
+//     return x;
+// }
+
+//     // Ordinary loop
+// fn fahr_to_cel_v_loop2(v: &[f32]) -> Vec<f32> {
+//     // Using reference value instead of cloning makes less computational cost
+//     let mut x = Vec::new();
+//     for _i in v {
+//         // (5.0/9.0)*(fahr - 32.0)
+//         x.push((5.0/9.0)*(_i - 32.0));
+//     }
+//     return x;
+// }
+
+// Bug to be solved !!!
+// fn fahr_to_cel_v_recursion1(v: Vec<f32>, _i: usize) -> Vec<f32> {
+//     // cloning at each function call would cause computational cost a lot
+//     let mut x: Vec<f32> = v;
+//     if _i < x.len() {
+//         x[_i] = (5.0/9.0)*(x[_i] - 32.0);
+//         fahr_to_cel_v_recursion1(x.clone(), _i+1);
+//     }
+//     return x;
+// }
+
+fn fahr_to_cel_v_recursion2(v: &mut Vec<f32>, _i: usize) -> Vec<f32> {
+    // modify the original vector v
+    if _i < v.len() {
+        v[_i] = (5.0 / 9.0) * (v[_i] - 32.0);
+        fahr_to_cel_v_recursion2(v, _i+1);
+    }
+    return v.clone();
+}
+
+fn main(){
+    // let v1: Vec<f32> = vec![0.,20.,40.];
+    // println!("{:?}",fahr_to_cel_v_loop1(v1));
+
+    // let v2: Vec<f32> = vec![0.];
+    // println!("{:?}",fahr_to_cel_v_loop1(v2));
+
+    // let v3: Vec<f32> = vec![0.];
+    // println!("{:?}",fahr_to_cel_v_loop1(v3));
+
+    // let v11: Vec<f32> = vec![0.,20.,40.];
+    // println!("{:?}",fahr_to_cel_v_loop2(&v11));
+
+    // let v22: Vec<f32> = vec![0.];
+    // println!("{:?}",fahr_to_cel_v_loop2(&v22));
+
+    // let v33: Vec<f32> = vec![0.];
+    // println!("{:?}",fahr_to_cel_v_loop2(&v33));
+
+    let v_args: Vec<String> = std::env::args().collect();
+    let mut v1 = Vec::new();
+
+    // if v_args.len() >= 2 {
+    //     for _i in 1..v_args.len() {
+    //         // if input is character, it will pass to 0 automatically
+    //         v1.push(v_args[_i].parse().unwrap_or(0.0));
+    //     }
+    // }
+
+    for i in 1..v_args.len() {
+        // if input is character, it will pass to 
+        match v_args[i].parse::<f32>() {
+            Ok(value) => v1.push(value),
+            Err(_) => {
+                eprintln!("Invalid input: {0} is not a valid input, skip {0}", v_args[i]);
+            }
+        }
+    }
+
+    // Input vector from user
+    println!("Fahr degrees: {:?}",v1);
+
+    // fahr_to_cel_v(v) Parameter v takes ownership of the value
+    // println!("{:?}",fahr_to_cel_v_loop1(v1.clone()));
+    
+    // using reference can make less computational cost
+    // println!("{:?}",fahr_to_cel_v_loop2(&v1));
+
+    // println!("{:?}",fahr_to_cel_v_recursion1(v1.clone(), 0));
+    
+    // used v1.clone() to prevent original value of v1
+    println!("{:?}",fahr_to_cel_v_recursion2(&mut v1.clone(), 0));
+    println!("{:?}",v1);
+}
+
+#[test]
+fn test_fahr_to_cel_v(){
+    let v1: Vec<f32> = vec![0.,20.,40.];
+    let expected: Vec<f32> = vec![-17.777779, -6.666667, 4.4444447];
+
+//     // test with 1st loop function
+//     assert_eq!(fahr_to_cel_v_loop1(v1.clone()),expected);
+
+//     // test with 2nd loop function
+//     assert_eq!(fahr_to_cel_v_loop2(&v1),expected);
+
+    // test with 2nd loop function
+    assert_eq!(fahr_to_cel_v_recursion2(&mut v1.clone(), 0),expected);
+}
