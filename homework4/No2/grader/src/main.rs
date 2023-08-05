@@ -1,3 +1,7 @@
+// No. 2
+// cargo run <score1> <score2> .... <score3>
+// cargo test
+
 fn grade_checker(mark: f32) -> &'static str {
     if mark >= 0.0 && mark <= 49.0 {return "Failed with F";}
     else if mark >= 50.0 && mark <= 60.0 {return "D";}
