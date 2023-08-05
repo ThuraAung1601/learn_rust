@@ -1,5 +1,5 @@
 // No. 2
-// cargo run <score1> <score2> .... <score3>
+// cargo run <score1> <score2> .... <scoreN>
 // cargo test
 
 fn grade_checker(mark: f32) -> &'static str {
