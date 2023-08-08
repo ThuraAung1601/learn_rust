@@ -1,5 +1,6 @@
 // No 3.3
 // Arrow 1 Recursion 
+// cargo run --bin arrow1_recursion 
 
 fn make_arrow1(size: i32, row_index: &mut i32, arrow: &mut String ) {
     // for _i in 1..=size
@@ -43,10 +44,40 @@ fn main() {
 }
 
 #[test]
-fn test_make_arrow1() {
-    let star = 4;
-    let expected = "*\n**\n***\n****\n***\n**\n*\n";
-    let arrow = make_arrow1(star);
+fn test_make_arrow1_recur() {
+    
+    let star = 3;
+    let mut  arrow = String::new();
+    let mut index = 0;
+
+    let expected = "*\n**\n***\n**\n*\n";
+    make_arrow1(star, &mut index, &mut arrow);
+
+    assert_eq!(expected, arrow);
+}
+
+#[test]
+fn test_arrow1_star_generator_with_zero() {
+    
+    let star_num = 0;
+    let mut  arrow = String::new();
+    let mut index = 0;
+    let expected = "";
+
+    star_generator(star_num, &mut index, &mut arrow);
+
+    assert_eq!(expected, arrow);
+}
+
+#[test]
+fn test_arrow1_star_generator_with_two() {
+    
+    let star_num = 2;
+    let mut  arrow = String::new();
+    let mut index = 0;
+    let expected = "**";
+
+    star_generator(star_num, &mut index, &mut arrow);
 
     assert_eq!(expected, arrow);
 }
