@@ -1,5 +1,6 @@
 // No 3.3
 // Arrow 2 Recursion 
+// cargo run --bin arrow2_recursion 
 
 fn make_arrow2(size: i32, row_index: &mut i32, arrow: &mut String ) {
     *row_index += 1;
@@ -34,7 +35,7 @@ fn star_generator(row_index: i32, star_index: &mut i32, arrow: &mut String) {
     // for _j in 1..=_i
     *star_index += 1;
     if *star_index <= row_index {
-        arrow.push_str("x");
+        arrow.push_str("*");
         star_generator(row_index, star_index, arrow);
     }
 }
@@ -52,11 +53,52 @@ fn main() {
     print!("{}",arrow2);
 }
 
-#[test]
-fn test_make_arrow2() {
-    let star = 4;
-    let expected = "   *\n  **\n ***\n****\n ***\n  **\n   *\n";
-    let arrow = make_arrow2(star);
 
-    assert_eq!(expected, arrow);
+#[test]
+fn test_make_arrow2_recur() {  
+      let star_num = 3;
+      let mut index = 0;
+      let mut arrow = String::new();
+      let expected = "  *\n **\n***\n **\n  *\n";
+      make_arrow2(star_num, &mut index, &mut arrow);
+      assert_eq!(expected, arrow);
+}
+
+#[test]
+fn test_arrow2_star_generator_with_zero() {
+        
+        let star_num = 0;
+        let mut  arrow = String::new();
+        let mut index = 0;
+        let expected = "";
+
+        star_generator(star_num, &mut index, &mut arrow);
+
+        assert_eq!(expected, arrow);
+}
+
+#[test]
+fn test_arrow2_star_generator_with_two() {
+        
+        let star_num = 2;
+        let mut  arrow = String::new();
+        let mut index = 0;
+        let expected = "**";
+
+        star_generator(star_num, &mut index, &mut arrow);
+
+        assert_eq!(expected, arrow);
+}
+
+#[test]
+fn test_arrow2_space_generator() {
+        
+        let space_num = 1;
+        let mut  arrow = String::new();
+        let mut index = 0;
+        let expected = " ";
+
+        space_generator(space_num, &mut index, &mut arrow);
+
+        assert_eq!(expected, arrow);
 }
