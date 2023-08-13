@@ -176,3 +176,11 @@ for n in 1..11 {
  print!("{} ", n * n);
 } // 1 4 9 16 25 36 49 64 81 100
 ```
+For loop will be in start..end-1 range. But you can limit the upper bound like this.
+```
+for n in 1..=10 {
+ print!("{} ", n * n);
+}
+```
+
+## Chapter 5
