@@ -8,26 +8,19 @@ fn extract_non_negatives(input_vec: &[f32]) -> Vec<f32> {
     return v1;
 }
 
-fn extract_non_negatives_r(input_list: &Vec<f32>, index : &mut usize, non_ng_list : &mut Vec<f32>) -> Vec<f32> {
-    if input_list.len() ==0  {
-        return  Vec::new();
+// 'a in Rust is a lifetime parameter that helps the compiler ensure that references remain valid and have the appropriate scope. 
+fn extract_non_negatives_r<'a>(input_vec: &'a [f32], non_ng_list: &'a mut Vec<f32>) -> &'a mut Vec<f32> {
+    if input_vec.is_empty() {
+        return non_ng_list;
     }
-
-    let f = input_list[*index];
-    if f >= 0.0 {
-        non_ng_list.push(f);
+    else {
+        let f = input_vec[0];
+        if f > 0. {
+            non_ng_list.push(f);
+        }
+        extract_non_negatives_r(&input_vec[1..], non_ng_list);
+        return non_ng_list;
     }
-
-    *index +=1;
-    if (*index < input_list.len()) {
-        extract_non_negatives_r(input_list, index, non_ng_list);
-    }
-
-    // for f in input_list {
-        
-    // }
-
-    non_ng_list.to_vec()
 }
 
 
@@ -50,10 +43,9 @@ fn main() {
     let c1 = extract_non_negatives(&v);
     let c2 = split_non_negative(&v);
 
-    let test_list = vec![1.0,-1.0,2.0,-2.0];
     let mut index: usize = 0;
-    let mut non_ng_list: Vec<f32> = Vec::new();
-    let c3 = extract_non_negatives_r(&test_list, &mut index , &mut non_ng_list);
+    let mut non_ng_list = Vec::new();
+    let c3 = extract_non_negatives_r(&v, &mut non_ng_list);
     println!("{:?}", c1);
     println!("{:?}", c2);
     println!("{:?}", c3);
@@ -83,19 +75,12 @@ fn test_split_non_negative() {
 
 
 #[test]
-fn test_extract_non_negatives_rec() {
-
-    let test_list = vec![0.8, -5.1, 1.6, -6.5, 10.5];
-
-    let mut index: usize = 0;
-
+fn test_extract_non_negatives_r() {
     let mut non_ng_list: Vec<f32> = Vec::new();
-
-
-    let res = extract_non_negatives_r(&test_list, &mut index , &mut non_ng_list);
+    let res = extract_non_negatives_r(&[0.8, -5.1, 1.6, -6.5, 10.5], &mut non_ng_list);
 
     assert_eq!(
-        res,
-        [0.8, 1.6, 10.5]
+        res.to_vec(), // because without to_vec() non_ng_list is &mut Vec<f32>
+       vec![0.8, 1.6, 10.5]
     );
 }
