@@ -75,17 +75,18 @@ print!("{}", _number);
 ```
 _ underscore is the don’t-care symbol, that in this situation creates a ***throwaway*** variable. Mostly used for temporary assignments for example in the loop.
 
-```
+
 Relational operators for Boolean
-- ==: is equal to
-- !=: is different from
-- <: is less than
-- <=: is less than or equal to
-- >: is greater than
-- >=: is greater than or equal to
-- "!" read “not”
-- "&&" read “logical-and”
-- "||" read “logical-or”
+```
+• ==: is equal to
+• !=: is different from
+• <: is less than
+• <=: is less than or equal to
+• >: is greater than
+• >=: is greater than or equal to
+• "!" read “not”
+• "&&" read “logical-and”
+• "||" read “logical-or”
 ```
 
 ```
