@@ -74,7 +74,12 @@ let _number = 12;
 print!("{}", _number);
 ```
 _ underscore is the don’t-care symbol, that in this situation creates a ***throwaway*** variable. Mostly used for temporary assignments for example in the loop.
-
+- You can used underscores in variables for better readibility, for example, 1_000_000 instead of 1000000.
+```
+let _n = 3_4.5;
+println!("{}",_n);
+// 34.5
+```
 
 Relational operators for Boolean
 ```
@@ -192,7 +197,7 @@ for n in 1..=10 {
 
 ## Chapter 5
 - **Array**, **Tuple** and **Vector** are structured ***sequence data*** in Rust. 
-- Cannot contain objects of different types in Array and Vector.
+- Cannot contain objects of different types in Array and Vector. Vector of numbers cannot be assigned to a vector of string.
 ```
 let a = [true, false];
 let b = [1, 2, 3, 4, 5];
@@ -227,3 +232,104 @@ for i in 0..x.len() { print!(" {}", x[i]); }
 // 2 3 4 That is a sentence.
 ```
 - Multidimensional
+```
+let mut x = [[[23; 4]; 8]; 15];
+x[14][7][3] = 56;
+print!("{}, {}", x[0][0][0], x[14][7][3]); // 23, 56
+```
+- The followings are *vector operations* in Rust.
+```
+let mut x = vec!["This", "is", "a", "sentence"];
+for i in 0..x.len() { print!("{} ", x[i]); } println!();
+// This is a sentence
+x.insert(1, "line");
+// This line is a sentence
+for i in 0..x.len() { print!("{} ", x[i]); } println!();
+x.insert(2, "contains");
+// This line contains is a sentence
+for i in 0..x.len() { print!("{} ", x[i]); } println!();
+x.remove(3);
+// This line contains a sentence
+for i in 0..x.len() { print!("{} ", x[i]); } println!();
+x.push("about Rust");
+// This line contains a sentence about Rust
+for i in 0..x.len() { print!("{} ", x[i]); } println!();
+x.pop();
+// This line contains a sentence
+for i in 0..x.len() { print!("{} ", x[i]); } println!();
+```
+The *vector.push(item)*; statement is equivalent to *vector.
+insert(vector.len(), item)*;, while the statement *vector.pop()* is equivalent to *vector.remove(vector.len() - 1)*.
+- Empty arrays and vectors can be written as follows:
+```
+let _a = [""; 0];
+let _v = vec![0; 0];
+```
+Copy entire array or vector
+```
+let mut a1 = vec![4, 56, -2];
+let a2 = vec![7, 81, 12500];
+println!("{:?} {:?}", a1, a2); // [4, 56, -2] [7, 81, 12500]
+a1 = a2;
+println!("{:?}", a1); // [7, 81, 12500]
+a1[1] = 10;
+println!("{:?}", a1); // [7, 10, 12500]
+println!("{:?} {:?}", a1, a2); // error
+```
+- a2 variable hasn’t been simply copied. Actually it has been moved, which means copied and destroyed.
+- Unlike arrays, when a vector is assigned to another vector, the original vector exists no more.
+
+## Chapter 6
+```
+let hexadecimal = 0x10;
+let octal = 0o10;
+let binary = 0b10;
+let mut n = 10;
+print!("{} ", n);
+n = hexadecimal;
+print!("{} ", n);
+n = octal;
+print!("{} ", n);
+n = binary;
+print!("{}", n);
+//  16 10 8 2
+```
+Exponential notation (e)
+```
+let one_thousand = 1e3;
+print!("{} ", one_thousand); // 1000
+```
+### Various Kinds of Signed Integer Numbers
+- Represent any number between 0 and 200 using only 8 bits, which is a quarter of 32 bits.
+- The larger our objects are, the more cache space they use.
+- The i8 type is the smallest, but it can only represent values between -128 and +127.
+- The u8 type is unsigned 8-bit integer containing values between 0 and +225.
+- If more than the range, error: literal out of range for `i8`.
+- Only the usize type is allowed as an index of an array.
+- **Cross compilation**, a compiler can generate machine code for a system having a different architecture from the one where the compiler is run. The system for which machine code is generated is named ***target*** (target folder in cargo package).
+
+```
+// Type inference
+let a = [0];
+let i = 0;
+print!("{}", a[i]);
+```
+***Explicit annotation***: “i” is used to initialize “_j”, an operation allowed only to expressions of type u16, it determines that “i” is of such type. 
+```
+let i = 0;
+let _j: u16 = i;
+let _k: i16 = i;
+```
+***Explicit conversion***
+```
+let a: i16 = 12;
+let b: u32 = 4;
+let c: f32 = 3.7;
+print!("{}", a as i8 + b as i8 + c as i8);
+```
+Print ASCII codes 
+```
+print!("{} {} {} {} {}", true as u8, false as u8,
+ 'A' as u32, 'à' as u32, '€' as u32);
+// 1 0 65 224 8364
+```
