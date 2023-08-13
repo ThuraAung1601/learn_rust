@@ -2,6 +2,9 @@
 ### Author: Carlo Milanesi
 
 DOI: https://link.springer.com/book/10.1007/978-1-4842-7208-4
+<br />
+You can try Rust using this playground online compiler: https://play.rust-lang.org/
+
 - [Chapter 1](#Chapter-1)
 - [Chapter 2](#Chapter-2)
 - [Chapter 3](#Chapter-3)
