@@ -1,6 +1,7 @@
 fn count_digits(input_str: &str) -> usize {
     let mut counter = 0;
     for _c in input_str.chars() {
+        // check whether _c is base 10 digit or not ?
         if _c.is_digit(10) {
             counter += 1;
         }
