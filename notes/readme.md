@@ -314,7 +314,7 @@ Exponential notation (e)
 let one_thousand = 1e3;
 print!("{} ", one_thousand); // 1000
 ```
-### Various Kinds of Signed Integer Numbers
+### Various Kinds of Number Types
 - Represent any number between 0 and 200 using only 8 bits, which is a quarter of 32 bits.
 - The larger our objects are, the more cache space they use.
 - The i8 type is the smallest, but it can only represent values between -128 and +127.
