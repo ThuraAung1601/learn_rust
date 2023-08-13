@@ -204,6 +204,13 @@ let b = [1, 2, 3, 4, 5];
 print!("{}, {}.", a.len(), b.len());
 //  2, 5.
 ```
+- Unlike vectors, you cannot modify arrays.
+```
+let _array1: [char; 3] = ['x', 'y', 'z'];
+let _array2: [f32; 200] = [0f32; 200];
+let _vector1: Vec<char> = vec!['x', 'y', 'z'];
+let _vector2: Vec<i32> = vec![0; 5000];
+```
 - Panic at runtime = stop immediately while compiling
 - index out of bounds: the length is 1 but the index is 1.
 ```
