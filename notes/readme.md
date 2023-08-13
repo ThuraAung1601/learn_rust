@@ -191,3 +191,11 @@ for n in 1..=10 {
 ```
 
 ## Chapter 5
+- **Array**, **Tuple** and **Vector** are structured ***sequence data*** in Rust. 
+- Cannot contain objects of different types in Array and Vector.
+```
+let a = [true, false];
+let b = [1, 2, 3, 4, 5];
+print!("{}, {}.", a.len(), b.len());
+//  2, 5.
+```
