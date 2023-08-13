@@ -1,9 +1,13 @@
+# Beginning Rust: Get Started with Rust 2021 Edition
+### Author: Carlo Milanesi
+
+DOI: https://link.springer.com/book/10.1007/978-1-4842-7208-4
 - [Chapter 1](#Chapter-1)
 - [Chapter 2](#Chapter-2)
 - [Chapter 3](#Chapter-3)
 - [Chapter 4](#Chapter-4)
 - [Chapter 5](#Chapter-5)
-- 
+- [Chapter 6](#Chapter-6)
 
 ## Chapter 1
 The source string 000140 is converted to the binary format.
@@ -287,6 +291,7 @@ println!("{:?} {:?}", a1, a2); // error
 - Unlike arrays, when a vector is assigned to another vector, the original vector exists no more.
 
 ## Chapter 6
+
 ```
 let hexadecimal = 0x10;
 let octal = 0o10;
