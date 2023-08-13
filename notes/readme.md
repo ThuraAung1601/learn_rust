@@ -1,8 +1,9 @@
 # Beginning Rust: Get Started with Rust 2021 Edition
-### Author: Carlo Milanesi
+### Book Author: Carlo Milanesi
 
 DOI: https://link.springer.com/book/10.1007/978-1-4842-7208-4
 <br />
+Notes were taken by Thura. <br />
 You can try Rust using this playground online compiler: https://play.rust-lang.org/
 
 - [Chapter 1: Getting Started](#Chapter-1)
