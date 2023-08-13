@@ -127,7 +127,7 @@ print!("{} {}", str::len("abcde"), "abcde".len());
 // 5 5
 ```
 - str is the library for string processing and len() is a function built in str library.
-- Use in this format ***lib::func** for example, ***str::len("abc")**
+- Use in this format ***lib::func*** for example, ***str::len("abc")***
 
 ## Chapter 4
 Here is the **control flow** example in Rust syntax.
@@ -199,3 +199,31 @@ let b = [1, 2, 3, 4, 5];
 print!("{}, {}.", a.len(), b.len());
 //  2, 5.
 ```
+- Panic at runtime = stop immediately while compiling
+- index out of bounds: the length is 1 but the index is 1.
+```
+let x = ["a"]; // array of strings
+let _y = x[1] // out of range
+```
+- Attributes: begins with a “#” character followed by an expression in brackets, for example, Deny, Warn, Allow.
+```
+#[deny(unused_variables)]
+let x = 1;
+#[warn(unused_variables)]
+let y = 2;
+#[allow(unused_variables)]
+let z = 3;
+```
+- ***Mutablity*** of array and vector
+```
+let mut x = ["This", "is", "a", "sentence"];
+x[2] = "a nice";
+print!("{} {} {} {}.", x[0], x[1], x[2], x[3]);
+// This is a nice sentence.
+
+let mut x = vec!["This", "is"]; print!("{}", x.len());
+x.push("a"); print!(" {}", x.len())
+for i in 0..x.len() { print!(" {}", x[i]); }
+// 2 3 4 That is a sentence.
+```
+- Multidimensional
