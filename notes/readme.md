@@ -5,12 +5,13 @@ DOI: https://link.springer.com/book/10.1007/978-1-4842-7208-4
 <br />
 You can try Rust using this playground online compiler: https://play.rust-lang.org/
 
-- [Chapter 1](#Chapter-1)
-- [Chapter 2](#Chapter-2)
-- [Chapter 3](#Chapter-3)
-- [Chapter 4](#Chapter-4)
-- [Chapter 5](#Chapter-5)
-- [Chapter 6](#Chapter-6)
+- [Chapter 1: Getting Started](#Chapter-1)
+- [Chapter 2: Doing Arithmetic and Writing More Code](#Chapter-2)
+- [Chapter 3: Naming Objects](#Chapter-3)
+- [Chapter 4: Controlling Executive Flow](#Chapter-4)
+- [Chapter 5: Using Data Sequences](#Chapter-5)
+- [Chapter 6: Using Primitive Types](#Chapter-6)
+- [Chapter 7: Enumeration and Matching](#Chapter-7)
 
 ## Chapter 1
 The source string 000140 is converted to the binary format.
@@ -203,7 +204,7 @@ for n in 1..=10 {
 ```
 
 ## Chapter 5
-- **Array**, **Tuple** and **Vector** are structured ***sequence data*** in Rust. 
+- **Array** and **Vector** are structured ***sequence data*** in Rust. 
 - Cannot contain objects of different types in Array and Vector. Vector of numbers cannot be assigned to a vector of string.
 ```
 let a = [true, false];
@@ -347,4 +348,106 @@ Print ASCII codes
 print!("{} {} {} {} {}", true as u8, false as u8,
  'A' as u32, 'à' as u32, '€' as u32);
 // 1 0 65 224 8364
+```
+
+## Chapter 7
+- **enum** introduced a new type defined in the program.
+- Such type is called ***enumerative*** because it contains a set of items with different data types.
+- enum types usually use with ***constructs*** such as **match**.
+``` 
+enum Continent {
+ Europe,
+ Asia,
+ Africa,
+ America,
+ Oceania,
+}
+
+let contin = Continent::Asia;
+// match is like switch in C++
+match contin {
+ Continent::Europe => print!("E"),
+ Continent::Asia => print!("As"),
+ Continent::Africa => print!("Af"),
+ Continent::America => print!("Am"),
+ Continent::Oceania => print!("O"),
+} // As
+```
+- enum forbids all relational operators like "==", ">" and "<".
+- ***Underscore in enum*** is used as *default* or *catch-all* case.
+```
+enum CardinalPoint { North, South, West, East }
+let direction = CardinalPoint::South;
+match direction {
+ CardinalPoint::North => print!("NORTH"),
+ CardinalPoint::South => print!("SOUTH"),
+ _ => {},
+}
+```
+If variable direction doesn't match with any of enums, it will return null tuple (). Here is another use case of match.
+```
+let a = 3;
+match a {
+ 3 => print!("three "),
+ 4 => print!("four "),
+ 5 => print!("five "),
+ _ => print!("other "),
+} // three 
+```
+If variable a is not 3 or 4 or 5, it will print "other " which is a default value. 
+<br />
+**match** can also be used in the loops as control flow.
+```
+for n in -2..5 {
+ println!("{} is {}.", n, match n {
+ 0 => "zero",
+ 1 => "one",
+ _ if n < 0 => "negative",
+ _ => "plural",
+ });
+}
+// -2 is negative.
+// -1 is negative.
+// 0 is zero.
+// 1 is one.
+// 2 is plural.
+// 3 is plural.
+// 4 is plural.
+```
+There are other ***constructs*** called **if-let** and **while-let**.
+```
+enum E {
+ Case1(u32),
+ Case2(char),
+ Case3(i64, bool),
+}
+```
+Using match ...
+```
+let v = E::Case3(1234, true);
+match v {
+ E::Case3(n, b) => if b { print!("{}", n) }
+ _ => {}
+}
+```
+Using *if-let* ...
+```
+let v = E::Case3(1234, true);
+if let E::Case3(n, b) = v {
+ if b { print!("{}", n) }
+} 
+```
+If there is else block and if is unsuccessful, it will continue to the else block. <br />
+You can also use *while-let* for conditional loops with enum ...
+```
+enum E {
+ Case1(u32),
+ Case2(char),
+}
+let mut v = E::Case1(0);
+while let E::Case1(n) = v {
+ print!("{}", n);
+ if n == 6 { break; }
+ v = E::Case1(n + 1);
+} // 0123456
 ```
