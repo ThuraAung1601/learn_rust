@@ -452,3 +452,76 @@ while let E::Case1(n) = v {
  v = E::Case1(n + 1);
 } // 0123456
 ```
+
+## Chapter 8
+- Tuples, structs and Tuple-structs are other ***composite*** types.
+- These data types can accept different types of data.
+**Tuples** are written with parenthesis ( ).
+```
+let data = (10000000, 183.19, 'Q');
+// let data: (i32, f64, char) = (10000000, 183.19, 'Q');
+let copy_of_data = data;
+print!("{}, {}, {}",
+ data.0, copy_of_data.1, data.2);
+// 10000000, 183.19, Q
+```
+**struct** are written with *struct* keyword curly brackets { }.
+```
+struct SomeData {
+ integer: i32,
+ fractional: f32,
+character: char,
+ five_bytes: [u8; 5],
+}
+let data = SomeData {
+ integer: 10_000_000,
+ fractional: 183.19,
+ character: 'Q',
+ five_bytes: [9, 0, 250, 60, 200],
+};
+print!("{}, {}, {}, {}",
+ data.five_bytes[3], data.integer,
+ data.fractional, data.character);
+// 60, 10000000, 183.19, Q
+```
+**Tuple-struct** are written with struct keyword and (). <br />
+Differing from both tuples and structs, empty tuple-structs are not allowed. Tuple-structs are not widely used actually.
+```
+struct SomeData (
+ i32,
+ f32,
+ char,
+ [u8; 5],
+);
+let data = SomeData (
+ 10_000_000,
+ 183.19,
+ 'Q',
+ [9, 0, 250, 60, 200],
+);
+print!("{}, {}, {}, {}",
+ data.2, data.0, data.1, data.3[2]);
+```
+***Lexical conventions***
+```
+enum VehicleKind {
+ Motorcycle,
+ Car,
+ Truck,
+}
+struct VehicleData {
+ kind: VehicleKind,
+ registration_year: u16,
+ registration_month: u8,
+ power: u16,
+}
+let vehicle = VehicleData {
+ kind: VehicleKind::Car,
+ registration_year: 2003,
+ registration_month: 11,
+ power: 120,
+};
+if vehicle.power > MAXIMUM_POWER {
+ println!("Too powerful");
+}
+```
