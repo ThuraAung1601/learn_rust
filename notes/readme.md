@@ -526,3 +526,22 @@ if vehicle.power > MAXIMUM_POWER {
  println!("Too powerful");
 }
 ```
+
+## Chapter 9
+**Functions** are used to ***encapsulate*** the code in a block instead of writing several times.
+```
+// function definition
+fn print_sum(addend1: f64, addend2: f64) {
+ println!("{} + {} = {}", addend1, addend2,
+ addend1 + addend2);
+}
+// function invocation
+print_sum(3., 5.);
+print_sum(3.2, 5.1);
+// 3 + 5 = 8
+// 3.2 + 5.1 = 8.3
+let _x = 3.;
+let _y = 5.;
+print_sum(x, y);
+```
+Variable that is passed to the function, but the value of the variable. It is a so-called *pass-by-value*.
