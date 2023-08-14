@@ -13,7 +13,8 @@ You can try Rust using this playground online compiler: https://play.rust-lang.o
 - [Chapter 5: Using Data Sequences](#Chapter-5)
 - [Chapter 6: Using Primitive Types](#Chapter-6)
 - [Chapter 7: Enumeration and Matching](#Chapter-7)
-
+- [Chapter 8: Using Heterogeneous Data Structures](#Chapter-8)
+  
 ## Chapter 1
 The source string 000140 is converted to the binary format.
 ```
