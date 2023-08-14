@@ -545,3 +545,73 @@ let _y = 5.;
 print_sum(x, y);
 ```
 Variable that is passed to the function, but the value of the variable. It is a so-called *pass-by-value*.
+- Functions can receive as well as ***return*** a value as a result of computation.
+- Functions can be exited early returning () - blank tuple. (*Early exist*)
+```
+fn double(x: f64) -> f64 { x * 2. }
+print!("{}", double(17.3));
+```
+### Passing arguments by reference
+- To optimize the passing of a (long) array to a function, you can pass to that function only the address of the array, letting the function work directly on the original array.
+- This method is known as *pass-by-reference*.
+```
+fn double(a: &mut [i32; 10]) {
+ for n in 0..10 {
+ (*a)[n] *= 2;
+ }
+}
+let mut arr = [5, -4, 9, 0, -7, -1, 3, 5, 3, 1];
+double(&mut arr);
+print!("{:?}", arr);
+// 
+```
+- The “&” symbol, in the expression &a, means the (memory) address of the object a.
+- The “*” symbol, in the expression *a, means the object that is present at the (memory) address a. It is called ***de-referencing***.
+- In the function body, we are not interested in handling the address itself, but in handling the object referred to by such address.
+```
+fn main() {
+    let a = 15;
+    let ref_a = &a;
+    print!("{} {} {}", a, *ref_a, ref_a);
+} // 15 15 15
+```
+```
+let mut a: i32 = 10;
+let mut b: i32 = 20;
+let mut p: &mut i32 = &mut a;
+print!("{} ", *p);
+*p += 1;
+print!("{} ", *p);
+p = &mut b;
+print!("{} ", *p);
+*p += 1; 
+print!("{} ", *p);
+// 10 11 20 21
+```
+The objects referred to by “p” are incremented, that is, they are read and written. This is allowed only if *p is mutable. So “p” cannot be of type &i32; it must be of type &mut i32, which is “reference to a mutable i32.”
+
+## Chapter 10
+**Concrete Function** <br />
+**Generic Function**: whose invocations can efficiently handle different data types and become a concrete function only when a concrete type is specified for T type parameter at the compile time.
+```
+// Library code
+fn myFunc<T>(ch: char, num1: T, num2: T) -> T {
+ if ch == 'a' { num1 }
+ else { num2 }
+}
+// Application code
+let a: i16 = myFunc::<i16>('a', 37, 41);
+let b: f64 = myFunc::<f64>('b', 37.2, 41.1);
+print!("{} {}", a, b);
+```
+- T: *type parameter* of the function declaration.
+- T type parameter could have been used in the body of the function, but not elsewhere.
+- myFunc::<i16>; this is the name of the concrete function.
+```
+fn swap<T1, T2>(a: T1, b: T2) -> (T2, T1) { (b, a) }
+fn main() {
+ let x = swap(3i16, 4u16);
+ let y = swap(5f32, true);
+ print!("{:?} {:?}", x, y);
+}
+```
