@@ -1,5 +1,4 @@
-fn extract_quoted_words(qoute: &str) -> Vec<String> {
-    fn extract_recursive(qoute: &str, result: &mut Vec<String>) {
+fn extract_recursive(qoute: &str, result: &mut Vec<String>) {
         if let Some((word, rest)) = qoute.split_once(" ") {
             let open_star = word.chars().next().unwrap_or('_');
             let close_star = word.chars().rev().next().unwrap_or('_');
@@ -15,15 +14,9 @@ fn extract_quoted_words(qoute: &str) -> Vec<String> {
         }
     }
 
-    let mut result = Vec::new();
-    extract_recursive(qoute, &mut result);
-
-    result
-}
-
 fn main() {
     let qoute = "C ** *C++* *Java *Python* Rust*      ";
-    let result = extract_quoted_words(qoute);
-
+    let mut result = Vec::new();
+    extract_recursive(qoute, &mut result);
     println!("Result of quote: {:?}", result);
 }
