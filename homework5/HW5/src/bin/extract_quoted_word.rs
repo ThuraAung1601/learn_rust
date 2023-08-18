@@ -1,48 +1,32 @@
-fn extract_quoted_words(text: &str) -> Vec<String> {
-    let mut words = Vec::new();
-    let mut current_word = String::new();
-    let mut is_quoting = false;
+fn extract_quoted_words(s: &str) -> Vec<String> {
+    let mut result = Vec::new();
+    for mut _w in s.split_whitespace() {
+        let open_star = _w.chars().next().unwrap_or('_');
+        let close_star = _w.chars().rev().next().unwrap_or('_');
 
-    for c in text.chars() {
-        match c {
-            '*' if !is_quoting => is_quoting = true,
-            '*' if is_quoting => {
-                if !current_word.is_empty() {
-                    words.push(current_word.clone());
-                }
-                current_word.clear();
-                is_quoting = false;
-            }
-            ' ' if is_quoting => {
-                if !current_word.is_empty() {
-                    words.push(current_word.clone());
-                }
-                current_word.clear();
-                is_quoting = false;
-            }
-            _ if is_quoting => current_word.push(c),
-            _ => {}
+        if open_star == '*' && close_star == '*' {
+            // Split open star and word
+            (_, _w) = _w.split_at(1);
+            // Split close star and word
+            (_w,_) = _w.split_at(_w.len()-1);
+            result.push(_w.to_string());
         }
     }
-    
-    if !current_word.is_empty() {
-        words.push(current_word);
-    }
-
-    return words;
+    return result;
 }
 
+
 fn main() {
-    let input = "C *C++* *Python* Rust*";
-    println!("{:?}",extract_quoted_words(input));
+    let s = "C ** *C++* *Java *Python* Rust*";
+    let v = extract_quoted_words(s);
+    println!("{:?}", v);
 }
 
 #[test]
 fn test_extract_quoted_words() {
-    let expected_output: Vec<String> = vec![];
-    assert_eq!(extract_quoted_words(""), expected_output);
+    assert_eq!(extract_quoted_words(""), Vec::<String>::new());
     assert_eq!(
-    extract_quoted_words("*Python* Rust*"),
-        vec!["Python"] // "**", "*C++*", "*Python*"
+    extract_quoted_words("C ** *C++* *Java *Python* Rust*"),
+    ["", "C++", "Python"] // "**", "*C++*", "*Python*"
     );
 }
