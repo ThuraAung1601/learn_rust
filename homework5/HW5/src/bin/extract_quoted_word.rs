@@ -8,7 +8,7 @@ fn extract_quoted_words(s: &str) -> Vec<String> {
             // Split open star and word
             (_, _w) = _w.split_at(1);
             // Split close star and word
-            (_w,_) = _w.split_at(_w.len()-1);
+            (_w, _) = _w.split_at(_w.len()-1);
             result.push(_w.to_string());
         }
     }
