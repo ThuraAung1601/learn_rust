@@ -22,6 +22,5 @@ fn count_vowels(s: &str) -> usize {
     assert_eq!(count_vowels(""), 0);
     assert_eq!(count_vowels("abEcd"), 2);
     assert_eq!(count_vowels("ab12Exey5 7x8U3y5z"), 4);
+    assert_eq!(count_vowels("ab12Exey5 7x8U 3y5z"), 4);
 }
- 
- 
