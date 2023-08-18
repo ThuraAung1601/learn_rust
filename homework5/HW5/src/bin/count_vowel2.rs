@@ -35,4 +35,12 @@ fn test_vowels_count2() {
             ("7x8U3y5z".to_string(), 1) // 'U'
         ]
     );
+    assert_eq!(
+        count_vowels_v2("ab12Exey5 7x8U 3y5z"),
+            [
+                ("ab12Exey5".to_string(), 3), // 'a', 'E', 'e'
+                ("7x8U".to_string(), 1), // 'U'
+                ("3y5z".to_string(), 0) // 
+            ]
+    );
 }
