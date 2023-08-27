@@ -14,7 +14,9 @@ You can try Rust using this playground online compiler: https://play.rust-lang.o
 - [Chapter 6: Using Primitive Types](#Chapter-6)
 - [Chapter 7: Enumeration and Matching](#Chapter-7)
 - [Chapter 8: Using Heterogeneous Data Structures](#Chapter-8)
-  
+- [Chapter 9: Defining Functions](#Chapter-9)
+- [Chapter 10: Generic Functions and Types](#Chapter-10)
+   
 ## Chapter 1
 The source string 000140 is converted to the binary format.
 ```
@@ -550,6 +552,23 @@ Variable that is passed to the function, but the value of the variable. It is a 
 ```
 fn double(x: f64) -> f64 { x * 2. }
 print!("{}", double(17.3));
+```
+Using iter and map function instead of looping
+```
+fn main() {
+    let v1 = [2,1,3];
+    
+    let v2: Vec<_> = v1.iter().map(|x| x*x).collect();
+    println!("{:?}", v2);
+    // [4, 1, 9]
+
+    let mut v3 = Vec::new();
+    for i in v1 {
+        v3.push(i*i);
+    }
+    println!("{:?}", v3);
+    // [4, 1, 9]
+}
 ```
 ### Passing arguments by reference
 - To optimize the passing of a (long) array to a function, you can pass to that function only the address of the array, letting the function work directly on the original array.
