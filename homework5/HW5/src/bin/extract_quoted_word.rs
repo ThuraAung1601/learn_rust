@@ -1,24 +1,18 @@
-fn extract_quoted_words(s: &str) -> Vec<String> {
-    let mut result = Vec::new();
-    for mut _w in s.split_whitespace() {
-        let open_star = _w.chars().next().unwrap_or('_');
-        let close_star = _w.chars().rev().next().unwrap_or('_');
-
-        if open_star == '*' && close_star == '*' {
-            // Split open star and word
-            (_, _w) = _w.split_at(1);
-            // Split close star and word
-            (_w, _) = _w.split_at(_w.len()-1);
-            result.push(_w.to_string());
+fn extract_quoted_words(input: &str) -> Vec<String> {
+    let mut v = Vec::new();
+    let input = input.to_string();
+    let input = input.split(" ");
+    for word in input {
+        if word.starts_with("*") && word.ends_with("*") {
+            v.push(word[1..word.len()-1].to_string())
         }
     }
-    return result;
+    return v;
 }
 
-
 fn main() {
-    let s = "C ** *C++* *Java *Python* Rust*";
-    let v = extract_quoted_words(s);
+    let input = "** C *C++* Python *Rust* Java* **";
+    let v = extract_quoted_words(input);
     println!("{:?}", v);
 }
 
