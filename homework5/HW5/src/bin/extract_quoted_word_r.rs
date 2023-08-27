@@ -1,24 +1,25 @@
-fn extract_quoted_words_r(quote: &str, result: &mut Vec<String>) {
-    if let Some((word, rest)) = quote.split_once(" ") {
-        let open_star = word.chars().next().unwrap_or('_');
-        let close_star = word.chars().rev().next().unwrap_or('_');
-        if open_star == '*' && close_star == '*' {
-            let (_, word) = word.split_at(1);
-            let (word, _) = word.split_at(word.len() - 1);
-
-            result.push(word.to_string());
+fn extract_quote_r(input: &str, v: &mut Vec<String>) -> Vec<String> {
+    if input.len() == 0 {
+        return v.to_vec();
+    }
+    else {
+        let input = input.to_string();
+        let words: Vec<&str> = input.split(" ").collect();
+        if words[0].starts_with("*") && words[0].ends_with("*") {
+            let quoted = words[0];
+            v.push(quoted[1..quoted.len()-1].to_string());
         }
-        extract_quoted_words_r(rest, result);
+        let rest = words[1..].join(" ");
+        return extract_quote_r(rest.as_str(), v);
     }
 }
 
 fn main() {
-    let qoute = "C ** *C++* *Java *Python* Rust*";
-    let mut result = Vec::new();
-    extract_quoted_words_r(qoute, &mut result);
-    println!("{:?}", result);
+    let input = "** C *C++* Python *Rust* Java* **";
+    // let input = "";
+    let v = extract_quote_r(input, &mut Vec::<String>::new());
+    println!("{:?}", v);
 }
-
 #[test]
 fn test_extract_quoted_words() {
     let mut v = Vec::new();
