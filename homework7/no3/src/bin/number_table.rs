@@ -1,6 +1,6 @@
 // No. 3.2
 // Format x, x^2 and x^3
-// How to run: cargo run --bin number_table > num_table.html
+// How to run: cargo run --bin number_table <start> <end> <step> > num_table.html
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
