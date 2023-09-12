@@ -65,7 +65,7 @@ fn main() {
 }
 
 #[test]
-fn test_sort_by() {
+fn test_sort() {
     let vec = vec![4.0, 1.0, 2.6, 5.2, -3.1, -5.0, 0.0];
     let expected_a = vec![-5.0, -3.1, 0.0, 1.0, 2.6, 4.0, 5.2];
     let expected_d = vec![5.2, 4.0, 2.6, 1.0, 0.0, -3.1, -5.0];
