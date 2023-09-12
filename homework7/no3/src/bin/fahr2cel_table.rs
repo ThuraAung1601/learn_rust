@@ -1,6 +1,6 @@
 // No. 3.1
 // Fahrenheit to Celsius conversion formula
-// How to run: cargo run --bin fahr2cel_table > temp_result.html
+// How to run: cargo run --bin fahr2cel_table <start> <end> <step> > temp_result.html
 
 fn fahr2cel(fahr: i32) -> f32 {
     (5.0/9.0)*(fahr as f32 - 32.0)
