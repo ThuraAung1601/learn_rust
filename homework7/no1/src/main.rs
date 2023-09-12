@@ -17,7 +17,7 @@ fn bubble_sort(v: &[f32]) -> (Vec<f32>, Vec<f32>) {
     for i in 0..ascending.len() {
         for j in 0..ascending.len()-i-1 {
             // println!("{:?}\t{:?}", ascending[j], ascending[j+1]);
-            if ascending[j] > ascending[j + 1] {
+            if ascending[j] > ascending[j+1] {
                 let temp = ascending[j];
                 ascending[j] = ascending[j+1];
                 ascending[j+1] = temp;
