@@ -18,7 +18,7 @@ fn main() {
     let mut end: i32 = end_arg.parse().unwrap_or(0);
     let mut step: usize = step_arg.parse().unwrap_or(0);
 
-    if start == 0 || end == 0 || step == 0 {
+    if step == 0 {
         (start, end, step) = (1, 1, 1);
     }
     
