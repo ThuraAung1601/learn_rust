@@ -45,7 +45,7 @@ fn main() {
         .map(|v| v.parse::<f32>().expect("Numbers only"))
         .collect();
 
-        println!("Vector {:?}", vec);
+    println!("Vector {:?}", vec);
 
     // No 1.1
     // Sort in ascending order
