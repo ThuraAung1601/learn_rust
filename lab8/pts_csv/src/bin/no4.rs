@@ -96,8 +96,8 @@ fn get_args() -> (String, String) {
 fn main() {
     let args: Vec<String> = std::env::args().collect();
 
-    let input = if args.len() < 2 || &args[1] == "-" {""} else {&args[1]};
-    let output = if args.len() < 3 || &args[2] == "-" {""} else {&args[2]};
+    let input = if args.len() < 2 {"-"} else {&args[1]};
+    let output = if args.len() < 3 {"-"} else {&args[2]};
     
     if input == "-" && output == "-" {
         let (input, output) = get_args();
