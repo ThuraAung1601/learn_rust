@@ -1,0 +1,14 @@
+<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">
+<rect width="100%" height="100%" fill="#EEEEEE" />
+<circle cx="250" cy="250" r="250"
+stroke="black" stroke-width="2" fill="none" />
+<circle cx="250" cy="250" r="10" fill="#00FFFF" />
+</svg>
+
+
+<svg height="500" width="500" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#EEEEEE" height="100%" width="100%"/>
+<circle cx="210.3937719538384" cy="307.55781566214466" fill="#FF0000" r="5"/>
+<circle cx="370.596236741739" cy="55.39112148675086" fill="#FF0000" r="5"/>
+<circle cx="116.313662085773" cy="66.14576986041521" fill="#FF0000" r="5"/>
+</svg>
