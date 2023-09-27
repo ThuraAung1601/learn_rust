@@ -3,6 +3,7 @@ use std::fs::File;
 use std::io::Read;
 use std::io::Write;
 
+#[allow(dead_code)]
 #[derive(Debug)]
 struct Circle {
     x: f32,
@@ -10,6 +11,7 @@ struct Circle {
     radius: f32,
 }
 
+#[allow(dead_code)]
 #[derive(Debug)]
 struct Layer {
     name: String,
@@ -17,17 +19,30 @@ struct Layer {
     circles: Vec<Circle>,
 }
 
-fn cal_average_area(layers: Vec<Layer>) -> Vec<(String, f32)> {
+fn cal_average_min_max_area(layers: Vec<Layer>) -> Vec<(String, f32, f32, f32)> {
     let mut result = Vec::new();
-    const PI: f32 = 3.142;
+    const PI: f32 = 3.14159265359; // Use a more accurate value of PI
+
     for l in layers {
         let mut sum = 0.;
+        let mut min_area = std::f32::MAX;
+        let mut max_area = std::f32::MIN;
+
         for c in &l.circles {
             let area = PI * c.radius * c.radius;
             sum += area;
+
+            // Update minimum and maximum area values
+            if area < min_area {
+                min_area = area;
+            }
+            if area > max_area {
+                max_area = area;
+            }
         }
+
         let avg_area = sum / l.circles.len() as f32;
-        result.push((l.name, avg_area))
+        result.push((l.name, avg_area, min_area, max_area));
     }
     result
 }
@@ -168,7 +183,7 @@ fn save_html_layer(writer: impl Write, pt_list: &[Layer]) {
 }
 
 // No 3.2
-fn save_html_circle_average_area(writer: impl Write, area_ls: &[(String, f32)]) {
+fn save_html_circle_average_area(writer: impl Write, area_ls: &[(String, f32, f32, f32)]) {
     let mut wtr = std::io::BufWriter::new(writer);
     // Start writing the HTML document
     writeln!(wtr, "<!DOCTYPE html>").unwrap();
@@ -181,13 +196,19 @@ fn save_html_circle_average_area(writer: impl Write, area_ls: &[(String, f32)]) 
 
     // Create a table for the results
     writeln!(wtr, "<table border=\"1\">").unwrap();
-    writeln!(wtr, "<tr><th>Name</th><th>Average Area</th></tr>").unwrap();
+    writeln!(
+        wtr,
+        "<tr><th>Name</th><th>Average Area</th><th>Minimum Area</th><th>Maximum Area</th></tr>"
+    )
+    .unwrap();
 
-    for (name, avg_area) in area_ls {
+    for (name, avg_area, min_area, max_area) in area_ls {
         // Write each result as a row in the table
         writeln!(wtr, "<tr>").unwrap();
         writeln!(wtr, "<td>{}</td>", name).unwrap();
         writeln!(wtr, "<td>{}</td>", avg_area).unwrap();
+        writeln!(wtr, "<td>{}</td>", min_area).unwrap();
+        writeln!(wtr, "<td>{}</td>", max_area).unwrap();
         writeln!(wtr, "</tr>").unwrap();
     }
 
@@ -210,7 +231,7 @@ fn main() {
     // No 2.2
     let input_file = File::open("layers.csv").expect("File cannot be opened.");
     let layer_ls = load_layer(input_file);
-    let result = cal_average_area(layer_ls);
+    let result = cal_average_min_max_area(layer_ls);
     let output_area_file = File::create("circle_area.html").expect("File cannot be created.");
     save_html_circle_average_area(output_area_file, &result);
 }
