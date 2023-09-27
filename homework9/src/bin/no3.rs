@@ -21,7 +21,7 @@ struct Layer {
 
 fn cal_average_min_max_area(layers: Vec<Layer>) -> Vec<(String, f32, f32, f32)> {
     let mut result = Vec::new();
-    const PI: f32 = 3.14159265359; // Use a more accurate value of PI
+    const PI: f32 = 3.142;
 
     for l in layers {
         let mut sum = 0.;
