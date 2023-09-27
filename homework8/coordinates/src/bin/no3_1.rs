@@ -1,3 +1,6 @@
+use std::fs::File;
+use std::io::Read;
+
 struct Point {
     x: f32,
     y: f32,
@@ -39,6 +42,27 @@ fn to_polar(pt_list: &[Point]) -> Vec<PolarPoint> {
     polar_pt_list
 }
 
+// No 2.1
+fn load_cartesian_file(reader: impl Read) -> Vec<Point> {
+    let mut pt_list = Vec::new();
+    let mut rdr = csv::ReaderBuilder::new()
+                        .has_headers(false)
+                        .from_reader(reader);
+
+    for r in rdr.records() {
+        let record = r.unwrap();
+        if record.len() < 2 {
+            continue;
+        }
+        let _x: f32 = record[0].parse().unwrap_or(0.0);
+        let _y: f32 = record[1].parse().unwrap_or(0.0);
+        // println!("{},{}", _x, _y);
+        let _point = Point::new(_x, _y);
+        pt_list.push(_point);
+    }
+    pt_list
+}
+
 fn main() {
 
     let mut html: String = String::new();
@@ -58,14 +82,10 @@ fn main() {
     </tr>
     ");
 
-    let p1 = Point::new(2., 2.);
-    let p2 = Point::new(3., 4.);
-    let p3 = Point::new(-1., 1.);
-    let p4 = Point::new(0., 5.);
+    let cartesian_input_file = File::open("./cartesian_input.csv").expect("Unable to open the file");
+    let cartesian_list = load_cartesian_file(cartesian_input_file);
+    let polar_list = to_polar(&cartesian_list);
     
-    let pt_list = vec![p1, p2, p3, p4];
-    let polar_list = to_polar(&pt_list);
-
     for _pt in polar_list {
         html.push_str(&format!("
             <tr>
