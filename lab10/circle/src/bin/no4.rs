@@ -53,10 +53,10 @@ fn gen_point_list(rng: &mut impl Rng, config: &RandConfig, num: usize) -> Vec<Po
 fn locate_n_point2(bound: &Bound, pt_ls: &[Point]) -> Vec<PointLocation> {
     let mut loc_list = Vec::new();
     for pt in pt_ls {
-        let dx = pt.x - bound.circle1.center.x;
-        let dy = pt.y - bound.circle1.center.y;
+        let dx1 = pt.x - bound.circle1.center.x;
+        let dy1 = pt.y - bound.circle1.center.y;
         // println!("{} {}", dx, dy);
-        let distance = (dx * dx + dy * dy).sqrt();
+        let distance1 = (dx1 * dx1 + dy1 * dy1).sqrt();
 
         if distance <= bound.circle1.radius && distance <= bound.circle2.radius {
             // pt.clone() in the PointLocation enum variants is to avoid ownership issues 
