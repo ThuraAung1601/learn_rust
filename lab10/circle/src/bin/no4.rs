@@ -5,7 +5,7 @@ use std::str::FromStr;
 
 #[derive(PartialEq)]
 #[derive(Clone)]
-// enable the availability to copy the Point object
+
 #[derive(Debug)]
 struct Point {
     x: f32,
@@ -44,7 +44,7 @@ fn gen_point_list(rng: &mut impl Rng, config: &RandConfig, num: usize) -> Vec<Po
     for _i in 0..num {
         let x = rng.gen_range(config.x_min ..= config.x_max);
         let y = rng.gen_range(config.y_min ..= config.y_max);
-        // println!("{} {}", x, y);
+       
         pt_list.push(Point{x, y});
     }
     return pt_list;
@@ -53,24 +53,21 @@ fn gen_point_list(rng: &mut impl Rng, config: &RandConfig, num: usize) -> Vec<Po
 fn locate_n_point2(bound: &Bound, pt_ls: &[Point]) -> Vec<PointLocation> {
     let mut loc_list = Vec::new();
     for pt in pt_ls {
-        let dx1 = pt.x - bound.circle1.center.x;
-        let dy1 = pt.y - bound.circle1.center.y;
-        // println!("{} {}", dx, dy);
-        let distance1 = (dx1 * dx1 + dy1 * dy1).sqrt();
+        let dx = pt.x - bound.circle1.center.x;
+        let dy = pt.y - bound.circle1.center.y;
+       
+        let distance = (dx * dx + dy * dy).sqrt();
 
         if distance <= bound.circle1.radius && distance <= bound.circle2.radius {
-            // pt.clone() in the PointLocation enum variants is to avoid ownership issues 
-            // and ensure that each PointLocation variant contains its own copy of the Point.
+           
             loc_list.push(PointLocation::InsideBoth(pt.clone(), distance));
         } 
         else if distance <= bound.circle1.radius {
-            // pt.clone() in the PointLocation enum variants is to avoid ownership issues 
-            // and ensure that each PointLocation variant contains its own copy of the Point.
+           
             loc_list.push(PointLocation::InsideFirst(pt.clone(), distance));
         }
         else if distance <= bound.circle2.radius {
-            // pt.clone() in the PointLocation enum variants is to avoid ownership issues 
-            // and ensure that each PointLocation variant contains its own copy of the Point.
+           
             loc_list.push(PointLocation::InsideSecond(pt.clone(), distance));
         }
         else {
@@ -82,7 +79,7 @@ fn locate_n_point2(bound: &Bound, pt_ls: &[Point]) -> Vec<PointLocation> {
 
 fn main() {
 
-    // // No 4.1
+    // No 4.1
     // let mut rng = rand::thread_rng();
     // let cfg = RandConfig{
     //     x_min: -1.5, x_max: 1.5,
@@ -165,24 +162,29 @@ fn main() {
     svg.push_str(&big_circle2);
 
     for pt in pt_list {
-        let dx = pt.x - circle1.center.x;
-        let dy = pt.y - circle1.center.y;
+        let dx1 = pt.x - circle1.center.x;
+        let dy1 = pt.y - circle1.center.y;
         // println!("{} {}", dx, dy);
-        let distance = (dx * dx + dy * dy).sqrt();
+        let distance1 = (dx1 * dx1 + dy1 * dy1).sqrt();
 
-        if distance <= circle1.radius && distance <= circle2.radius {
+        let dx2 = pt.x - circle2.center.x;
+        let dy2 = pt.y - circle2.center.y;
+        // println!("{} {}", dx, dy);
+        let distance2 = (dx2 * dx2 + dy2 * dy2).sqrt();
+
+        if distance1 <= circle1.radius && distance2 <= circle2.radius {
             // pt.clone() in the PointLocation enum variants is to avoid ownership issues 
             // and ensure that each PointLocation variant contains its own copy of the Point.
             let small_circle = format!("<circle cx=\"{}\" cy=\"{}\" r=\"2\" stroke=\"black\" stroke-width=\"2\" fill=\"green\" />\n", pt.x, pt.y);
             svg.push_str(&small_circle);
         } 
-        else if distance <= circle1.radius {
+        else if distance1 <= circle1.radius {
             // pt.clone() in the PointLocation enum variants is to avoid ownership issues 
             // and ensure that each PointLocation variant contains its own copy of the Point.
             let small_circle = format!("<circle cx=\"{}\" cy=\"{}\" r=\"2\" stroke=\"black\" stroke-width=\"2\" fill=\"red\" />\n", pt.x, pt.y);
             svg.push_str(&small_circle);
         }
-        else if distance <= circle2.radius {
+        else if distance2 <= circle2.radius {
             // pt.clone() in the PointLocation enum variants is to avoid ownership issues 
             // and ensure that each PointLocation variant contains its own copy of the Point.
             let small_circle = format!("<circle cx=\"{}\" cy=\"{}\" r=\"2\" stroke=\"black\" stroke-width=\"2\" fill=\"blue\" />\n", pt.x, pt.y);
