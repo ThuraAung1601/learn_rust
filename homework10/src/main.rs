@@ -130,7 +130,7 @@ fn test_img_flip() {
         "   ==<"]);
 }
 
-// Test for No.1
+// Test for No.2
 #[test]
 fn test_img_cat() {
     let emp = ["".to_string(); 0];
