@@ -4,7 +4,8 @@
 DOI: https://link.springer.com/book/10.1007/978-1-4842-7208-4
 <br />
 Notes were taken by Thura. <br />
-You can try Rust using this playground online compiler: https://play.rust-lang.org/
+You can try Rust using this playground online compiler: https://play.rust-lang.org/ <br />
+These notes are intended only for beginners with no Rust knowledge and are taken from the lecture sessions.
 
 - [Chapter 1: Getting Started](#Chapter-1)
 - [Chapter 2: Doing Arithmetic and Writing More Code](#Chapter-2)
@@ -16,6 +17,12 @@ You can try Rust using this playground online compiler: https://play.rust-lang.o
 - [Chapter 8: Using Heterogeneous Data Structures](#Chapter-8)
 - [Chapter 9: Defining Functions](#Chapter-9)
 - [Chapter 10: Generic Functions and Types](#Chapter-10)
+- [Chapter 11: Allocating Memory](#Chapter-11)
+- [Chapter 14: Using Changeable String](#Chapter-14)
+- [Chapter 15: Ranges and Slices](#Chapter-15)
+- [Chapter 16: Using Iterators](#Chapter-16)
+- [Chapter 17: Input/Output and Error handling](#Chapter-17)
+- [Chapter 18: Data Encapsulation](#Chapter-18)
    
 ## Chapter 1
 The source string 000140 is converted to the binary format.
