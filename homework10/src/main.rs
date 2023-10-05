@@ -61,9 +61,8 @@ fn vcat(img1: &[String], img2: &[String]) -> Vec<String> {
 // No.2.2
 fn hcat(img1: &[String], img2: &[String]) -> Vec<String> {
     let mut hcat = Vec::new();
-    let max_img1 = img1.iter().map(|s| s.len()).max().unwrap_or(0);
-    let max_img2 = img2.iter().map(|s| s.len()).max().unwrap_or(0);
-    let max_length = max_img1.max(max_img2);
+    // let max_img1 = img1.iter().map(|s| s.len()).max().unwrap_or(0);
+    let max_length = maxi_len(img1);
     // println!("{}", max_length);
     for (_i, _j) in img1.iter().zip(img2.iter()) {
         // println!("{}{}", _i, _j);
@@ -98,13 +97,36 @@ fn main() {
     println!("horizontal concatenate: {:?}", hcat(&data, &data[..2]));
 }
 
-// output:
-// ["<--", "#####", "<=="]
-// vertical flip: ["<==", "#####", "<--"]
+// Output
+
+// ["<--", 
+// "#####", 
+// "<=="]
+
+// vertical flip: 
+// ["<==", 
+// "#####", 
+// "<--"]
+
 // horizontal flip: ["  --<", "#####", "  ==<"]
-// vertical concatenate: ["<--", "#####", "<==", "<--", "#####", "<=="]
-// horizontal concatenate: ["<--<--", "##########", "     <=="]
-// horizontal concatenate: ["<--<--", "##########", "<=="]
+
+// vertical concatenate: 
+// ["<--", 
+// "#####", 
+// "<==", 
+// "<--", 
+// "#####", 
+// "<=="]
+
+// horizontal concatenate: 
+// ["<--  <--", 
+// "##########", 
+// "     <=="]
+
+// horizontal concatenate: 
+// ["<--  <--",
+// "##########",
+// "<=="]
 
 // Test for No.1
 #[test]
@@ -161,4 +183,39 @@ fn test_img_cat() {
                                     "<--  <--",
                                     "##########",
                                     "     <=="]);
+}
+
+// Test2 for No.2
+#[test]
+fn test_img_cat2() {
+    let data1 = [
+        "<--",
+        "****",
+        "<=="
+        ].map(|v| v.to_string());
+
+    let data2 = [
+        "<--",
+        "#####",
+        "<=="
+        ].map(|v| v.to_string());
+
+    
+    assert_eq!(vcat(&data1, &data2), [
+                                    "<--",
+                                    "****",
+                                    "<==",
+                                    "<--",
+                                    "#####",
+                                    "<=="
+                                ]);
+    assert_eq!(hcat(&data1, &data2), [
+                                    "<-- <--",
+                                    "****#####",
+                                    "<== <=="]);
+
+    assert_eq!(hcat(&data2, &data1), [
+                                    "<--  <--",
+                                    "#####****",
+                                    "<==  <=="]);
 }
