@@ -23,6 +23,7 @@ fn word_counter(text: &str) -> usize {
 }
 
 impl Document {
+    // used impl for encapsulation
     fn make_document(file: &str, text: &str) -> Document {
         let mut para_vec = Vec::new();
         for l in text.split("\n\n") {
