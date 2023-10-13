@@ -34,4 +34,4 @@ If you have any questions or concerns about this repository, please feel free to
 
 Thank you for respecting academic honesty and for using this repository responsibly.
 
-Feel free to customize and expand upon this template to suit your specific needs and the guidelines of your educational institution. It's important to communicate the importance of academic integrity clearly and promote responsible use of your repository as a learning resource.
+Feel free to take reference, customize and expand upon this template to suit your specific needs and the guidelines of your educational institution. It's important to communicate the importance of academic integrity clearly and promote the responsible use of your repository as a learning resource.
