@@ -15,7 +15,7 @@ struct Circle {
 }
 
 impl Circle {
-    fn new(x: i32, y: i32, radius: f32) -> Box<Circle> {
+    fn new(x: i32, y: i32, radius: f32) -> Box<dyn Shape> {
         Box::new(Circle { x, y, radius })
     }
 }
@@ -49,7 +49,7 @@ struct Rectangle {
 }
 
 impl Rectangle {
-    fn new(x: i32, y: i32, width: f32, height: f32) -> Box<Rectangle> {
+    fn new(x: i32, y: i32, width: f32, height: f32) -> Box<dyn Shape> {
         Box::new(Rectangle { x, y, width, height })
     }
 }
