@@ -8,6 +8,21 @@ trait Shape {
     fn cloner(&self) -> Box<dyn Shape>;
 }
 
+struct ShapeVector(Vec<Box<dyn Shape>>);
+
+impl Clone for Box<dyn Shape> {
+    fn clone(&self) -> Box<dyn Shape> {
+        self.cloner()
+    }
+}
+
+impl Clone for ShapeVector {
+    fn clone(&self) -> Self {
+        let cloned_shapes: Vec<Box<dyn Shape>> = self.0.iter().map(|shape| shape.clone()).collect();
+        ShapeVector(cloned_shapes)
+    }
+}
+
 struct Circle {
     x: i32,
     y: i32,
@@ -135,18 +150,18 @@ fn test_shapes_002() {
     assert_eq!(output, EXPECTED_002);
 }
 
-// #[test]
-// fn test_shapes_003() {
-//     let input_list = input_shape_list();
-//     let shape_list = input_list.clone();
-//     let omap = shape_list.iter().map(
-//     |s| format!("{}, area: {:.2}", s.rep_string(), s.area()) );
-//     let output: Vec<_> = omap.collect();
-//     assert_eq!(output, EXPECTED_002);
-// }
-
 #[test]
 fn test_shapes_003() {
+    let input_list = input_shape_list();
+    let shape_list = input_list.clone();
+    let omap = shape_list.iter().map(
+    |s| format!("{}, area: {:.2}", s.rep_string(), s.area()) );
+    let output: Vec<_> = omap.collect();
+    assert_eq!(output, EXPECTED_002);
+}
+
+#[test]
+fn test_shapes_004() {
     let input_list = input_shape_list();
     let mut cloned_shapes: Vec<Box<dyn Shape>> = Vec::new();
 
