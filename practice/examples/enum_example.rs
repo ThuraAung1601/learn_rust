@@ -24,6 +24,12 @@ impl Shape {
             _ => panic!("Error"),
         }
     }
+    fn clone(&self) -> Self {
+        match self {
+            Shape::Circle{x, y, radius} => Shape::Circle{x: *x, y: *y, radius: *radius},
+            Shape::Rectangle{x, y, w, h} => Shape::Rectangle{x: *x, y: *y, w: *w, h: *h},
+        }
+    }
 }
 
 #[derive(Debug)]
@@ -55,4 +61,7 @@ fn main() {
     };
     let locate = Location::Inside(pt1);
     println!("{:?}", locate);
+
+    let cloned = c1.clone();
+    println!("{:?}", cloned);
 }
