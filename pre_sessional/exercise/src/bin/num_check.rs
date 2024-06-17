@@ -1,8 +1,8 @@
 fn odd_or_even(num: &f32) -> String {
     if *num%2.0 == 0.0 {
-        return "odd".to_string();
-    } else {
         return "even".to_string();
+    } else {
+        return "odd".to_string();
     }
 }
 
@@ -22,4 +22,15 @@ fn main() {
 
     println!("{}", odd_or_even(&number));
     println!("{}", pos_or_neg(&number));
+}
+
+#[test]
+fn test_odd_or_even() {
+    assert_eq!(odd_or_even(&3.0), "odd".to_string());
+    assert_eq!(odd_or_even(&4.0), "even".to_string());
+}
+
+#[test]
+fn test_pos_or_neg() {
+    assert_eq!(pos_or_neg(&-4.0), "negative".to_string());
 }
