@@ -1,7 +1,3 @@
-fn check_even_odd<T>(num: T) {    
-    if 
-}
-
 fn main() {
     let args: Vec<String> = std::env::args().collect();
     let arg: &str = if args.len() < 2 {""} else {&args[1]};
