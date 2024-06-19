@@ -3,7 +3,7 @@
 
 DOI: https://link.springer.com/book/10.1007/978-1-4842-7208-4
 <br />
-Notes were taken by Thura. <br />
+Notes were taken by Thura (June) from Prof. Ekapol's class. <br />
 You can try Rust using this playground online compiler: https://play.rust-lang.org/ <br />
 These notes are intended only for beginners with no Rust knowledge and are taken from the lecture sessions.
 
