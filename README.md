@@ -2,7 +2,7 @@
 
 Welcome to my coursework repository for Elementary System Programming Class. Before you proceed, please take a moment to review and acknowledge the importance of academic honesty and the consequences of plagiarism.
 
-Rust Class Summary Notes : https://github.com/ThuraAung1601/learn_rust/tree/main/notes 
+Rust Class Summary Notes : [Here](Notes/README.md)
 
 ## Academic Honesty
 
